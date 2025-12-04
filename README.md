@@ -71,4 +71,4 @@ Note that you may need to manually set your yarn version by executing
 `yarn set version 4.4.1`
 
 4. Run the tests
-`anchor test`
+`anchor test`# Solana_Crowdsale
