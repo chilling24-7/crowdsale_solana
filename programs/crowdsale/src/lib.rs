@@ -22,7 +22,9 @@ pub mod crowdsale {
         }
 
         // Where a user or owner can withdraw SOL
-
+        pub fn withdraw(ctx: Context(Withdraw)) -> Result<()> {
+          instructions::withdraw(ctx)
+        }
 }
 
 #[derive(Accounts)]
