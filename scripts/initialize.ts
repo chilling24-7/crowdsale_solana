@@ -7,7 +7,7 @@
 // We include nocheck just to avoid 
 // conflicts and simplify the script
 // @ts-nocheck
-// Test
+
 import * as anchor from "@coral-xyz/anchor"
 import { clusterApiUrl, Connection, PublicKey } from '@solana/web3.js'
 
