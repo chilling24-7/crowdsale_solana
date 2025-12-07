@@ -28,4 +28,26 @@ describe("Crowdsale", () => {
   console.log(`Creator Public Key: ${creator.publicKey}`)
   console.log(`Crowdsale Public Key: ${crowdsaleKeypair.publicKey}`)
   console.log(`Buyer Public Key: ${buyerKeypair.publicKey}\n`)
+
+  const ID = crowdsaleKeypair.publicKey
+  const COST = 1
+
+  /*  -- Setup Crowdsale Authority --- */
+  // In Order to transfer tokens and we need to create the authority of the Crowdsale
+  // This wil be based on the id of the Crowdsale
+
+  const crowdsalePDA = PublicKey.findProgramAddressSync(
+    [ID.toBuffer()],
+    anchor.workspace.Crowdsale.programId
+  )[0]
+
+  const crowdsaleAuthorityPDA = PublicKey.findProgramAddressSync(
+    [ID.toBuffer()], 'authority',
+    anchor.workspace.Crowdsale.programId
+  )[0]
+
+  console.log(`Crowdsale Key: ${crowdsalePDA}`)
+
+  console.log(`Crowdsale Key: ${crowdsaleAuthorityPDA}`)
+  
 });

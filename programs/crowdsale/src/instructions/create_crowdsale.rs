@@ -1,4 +1,4 @@
-use { 
+use {
     anchor_lang::prelude::*,
     anchor_spl::{
         associated_token::AssociatedToken,
@@ -7,8 +7,8 @@ use {
 };
 
 use crate::{
-        constants::AUTHORITY_SEED,
-        state::{Crowdsale, CrowdsaleStatus},
+    constants::AUTHORITY_SEED,
+    state::{Crowdsale, CrowdsaleStatus},
 };
 
 /**
@@ -16,18 +16,18 @@ use crate::{
  * @param id: This will be the ID of the crowdsale
  * @param cost: Cost of 1 token
  */
-pub fn create_crowdsale(ctx: Context<CreateCrowdsale>, id: PubKey, cost: u32) -> Result<()> {
+pub fn create_crowdsale(ctx: Context<CreateCrowdsale>, id: Pubkey, cost: u32) -> Result<()> {
     let crowdsale = &mut ctx.accounts.crowdsale;
     crowdsale.id = id;
     crowdsale.cost = cost;
     crowdsale.mint_account = ctx.accounts.mint_account.key();
     crowdsale.token_account = ctx.accounts.token_account.key();
-    crowdsale.status = CreateCrowdsale::Open;
-    crowdsale.owner = ctx.accounts.owner.key();
+    crowdsale.status = CrowdsaleStatus::Open;
+    crowdsale.owner = ctx.accounts.creator.key();
 
-    msq!("Crowdsale Created")
-    
-    ok(())
+    msg!("Crowdsale created!");
+
+    Ok(())
 }
 
 #[derive(Accounts)]

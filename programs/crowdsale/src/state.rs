@@ -1,24 +1,30 @@
 use anchor_lang::prelude::*;
 
-$[account]
-pub struct Crowdsale{
-    pub id: PubKey,
-    
+#[account]
+pub struct Crowdsale {
+    // ID of crowdsale
+    pub id: Pubkey,
+
+    // Cost of token
     pub cost: u32,
 
-    pub mint_account: PubKey,
+    // Token mint account
+    pub mint_account: Pubkey,
 
+    // Crowdsale token account
     pub token_account: Pubkey,
 
+    // Status of the crowdsale
     pub status: CrowdsaleStatus,
 
-    pub owner: PubKey,
+    // Owner of the crowdsale
+    pub owner: Pubkey,
 }
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, ParialEq, Eq)]
-
-pub enum Crowdsale {
-    Open, Closed
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, PartialEq, Eq)]
+pub enum CrowdsaleStatus {
+    Open,
+    Closed,
 }
 
 impl Crowdsale {

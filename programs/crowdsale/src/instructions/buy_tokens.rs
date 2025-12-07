@@ -12,8 +12,8 @@ use crate::{
     state::Crowdsale
 };
 
-pub fn buy_tokens(ctx: Context<BuyTokens, amount: u32) -> Result<()> {
-    // Calculate how much Sol is Needed to buy x amount of tokens
+pub fn buy_tokens(ctx: Context<BuyTokens>, amount: u32) -> Result<()> {
+    // Calculate how much SOL needed in order to buy x amount of tokens
     // amount of tokens * cost of 1 token
     let amount_of_lamports = (amount * ctx.accounts.crowdsale.cost) as u64;
 
@@ -21,7 +21,7 @@ pub fn buy_tokens(ctx: Context<BuyTokens, amount: u32) -> Result<()> {
     let from = &ctx.accounts.buyer;
     let to = &ctx.accounts.crowdsale;
 
-    let transfer_instruction::system_instruction::transfer(&from.key(), &to.key(), amount_of_lamports)
+    let transfer_instruction = system_instruction::transfer(&from.key(), &to.key(), amount_of_lamports);
 
     anchor_lang::solana_program::program::invoke_signed(
         &transfer_instruction,
@@ -33,7 +33,7 @@ pub fn buy_tokens(ctx: Context<BuyTokens, amount: u32) -> Result<()> {
         &[],
     )?;
 
-    //Transfer Tokens
+    // Transfer tokens
     let authority_bump = ctx.bumps.crowdsale_authority;
     let authority_seeds = &[
         &ctx.accounts.crowdsale.id.to_bytes(),
@@ -75,7 +75,7 @@ pub struct BuyTokens<'info> {
 
     #[account(
         mut, 
-        seed = [
+        seeds = [
             crowdsale.id.as_ref(),
         ],
         bump,
