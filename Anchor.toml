@@ -5,10 +5,10 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-crowdsale = "HciPz9qoNEBBWga6KWomnDovANbQWnTAT5iFSNW7Ji3K"
+crowdsale = "4tAj8UbxCCVChy785xKz4ZK17vKch3CAbwM8co7u8VUb"
 
 [programs.localnet]
-crowdsale = "HciPz9qoNEBBWga6KWomnDovANbQWnTAT5iFSNW7Ji3K"
+crowdsale = "4tAj8UbxCCVChy785xKz4ZK17vKch3CAbwM8co7u8VUb"
 
 [registry]
 url = "https://api.apr.dev"
